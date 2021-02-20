@@ -1,5 +1,5 @@
 <?php
-namespace privatizeja\Response;
+namespace MicroPHPAnswerer\Response;
 
 /**
  * Classe responsavel por definir uma resposta a requisição

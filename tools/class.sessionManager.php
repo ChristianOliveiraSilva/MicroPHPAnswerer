@@ -1,5 +1,5 @@
 <?php
-namespace privatizeja\SessionManager;
+namespace MicroPHPAnswerer\SessionManager;
 
 /**
  * Classe responsavel por manipular a sessao

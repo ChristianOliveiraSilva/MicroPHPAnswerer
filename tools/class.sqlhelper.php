@@ -1,5 +1,5 @@
 <?php
-namespace privatizeja\SqlHelper;
+namespace MicroPHPAnswerer\SqlHelper;
 
 /**
  * Classe responsavel por ajudar a criar o SQL

@@ -1,5 +1,5 @@
 <?php
-namespace privatizeja\Endpoint;
+namespace MicroPHPAnswerer\Endpoint;
 
 require_once 'class.paramCleaner.php';
 require_once 'class.response.php';
@@ -7,11 +7,11 @@ require_once 'class.connection.php';
 require_once 'class.JWT.php';
 require_once 'class.sessionManager.php';
 
-use privatizeja\ParamCleaner\ParamCleaner;
-use privatizeja\Response\Response;
-use privatizeja\Connection\Connection;
-use privatizeja\JWTParser\JWTParser;
-use privatizeja\SessionManager\SessionManager;
+use MicroPHPAnswerer\ParamCleaner\ParamCleaner;
+use MicroPHPAnswerer\Response\Response;
+use MicroPHPAnswerer\Connection\Connection;
+use MicroPHPAnswerer\JWTParser\JWTParser;
+use MicroPHPAnswerer\SessionManager\SessionManager;
 
 /**
  * Classe responsavel por criar os endpoints

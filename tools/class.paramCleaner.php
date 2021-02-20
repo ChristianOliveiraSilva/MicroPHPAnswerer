@@ -1,5 +1,5 @@
 <?php
-namespace privatizeja\ParamCleaner;
+namespace MicroPHPAnswerer\ParamCleaner;
 
 /**
  * Classe responsavel por tratar os parametros da requisição

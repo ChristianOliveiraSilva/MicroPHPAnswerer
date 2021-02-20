@@ -1,12 +1,12 @@
 <?php
-namespace privatizeja\Connection;
+namespace MicroPHPAnswerer\Connection;
 
 /**
  * Classe responsavel por criar conexao com  banco de dados
  */
 class Connection
 {
-    const DBNAME = "privatizeja";
+    const DBNAME = "MicroPHPAnswerer";
     private $conn;
 
     /*
