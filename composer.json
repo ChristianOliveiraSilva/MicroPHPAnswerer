@@ -1,0 +1,13 @@
+{
+    "name": "MicroPHPAnswerer",
+    "description": "A PHP Micro Framework for High Development and API Responses",
+    "authors": [
+        {
+            "name": "Christian de Oliveira Silva",
+            "email": "christian.oliveira.trabalho@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.4"
+    }
+}
