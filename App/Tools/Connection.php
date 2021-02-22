@@ -6,15 +6,14 @@ namespace MicroPHPAnswerer\Tools;
  */
 class Connection
 {
-    const DBNAME = "MicroPHPAnswerer";
     private $conn;
 
     /*
      * Construtor
      */
-    function __construct()
+    function __construct(string $host, string $database, string $user, string $password)
     {
-        $this->connect('localhost','postgres','postgres');
+        $this->connect($host, $database, $user, $password);
     }
 
     /*
@@ -24,9 +23,8 @@ class Connection
      * @param string $password senha do banco de dados
      * @return ParamCleaner
      */
-    public function connect(string $host, string $user, string $password) :void
+    public function connect(string $host, string $database, string $user, string $password) :void
     {
-        $database = Connection::DBNAME;
         try {
             $this->conn = new \PDO("pgsql:host=$host dbname=$database user=$user password=$password");
         } catch (\PDOException $e) {

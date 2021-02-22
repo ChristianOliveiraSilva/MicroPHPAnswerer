@@ -47,11 +47,17 @@ class Endpoint
      * Construtor
      * @param bool $validateJWT Validar o JWT da requisição
      */
-    function __construct($validateJWT = true)
-    {
+    function __construct(
+        $validateJWT = true,
+        $hasConnection = false,
+        string $host = 'localhost',
+        string $database = 'postgres',
+        string $user = 'postgres',
+        string $password = 'postgres'
+    ) {
         header("Content-type: application/json");
 
-        // Validações na requsição
+        // Validações na requisição
         $this->ignoreRequestMethodIfNotPost();
         $this->sessionManager = new SessionManager;
         if ($validateJWT)
@@ -59,7 +65,10 @@ class Endpoint
 
         $this->paramCleaner = new ParamCleaner;
         $this->response = new Response;
-        $this->connection = new Connection;
+        
+        if($hasConnection) 
+            $this->connection = new Connection($host, $database, $user, $password);
+        
         register_shutdown_function(array($this, 'answerRequest'));
     }
 
