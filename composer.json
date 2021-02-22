@@ -5,12 +5,16 @@
         {
             "name": "Christian de Oliveira Silva",
             "email": "christian.oliveira.trabalho@gmail.com"
+        },
+        {
+            "name": "Vitor Livi da Silva",
+            "email": "Vitorlivi1999@gmail.com"
         }
     ],
     "require": {
         "php": ">=7.4"
     },
     "autoload": {
-        "psr-4": {"MicroPHPAnswerer\\": "tools"}
+        "psr-4": {"MicroPHPAnswerer\\": "App/"}
     }
 }

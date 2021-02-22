@@ -1,5 +1,5 @@
 <?php
-namespace MicroPHPAnswerer\SqlHelper;
+namespace MicroPHPAnswerer\Tools;
 
 /**
  * Classe responsavel por ajudar a criar o SQL

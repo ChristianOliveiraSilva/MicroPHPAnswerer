@@ -1,5 +1,5 @@
 <?php
-namespace MicroPHPAnswerer\ParamCleaner;
+namespace MicroPHPAnswerer\Tools;
 
 /**
  * Classe responsavel por tratar os parametros da requisição

@@ -1,5 +1,5 @@
 <?php
-namespace MicroPHPAnswerer\JWTParser;
+namespace MicroPHPAnswerer\Tools;
 
 /**
  * Classe responsavel por parsear JWT

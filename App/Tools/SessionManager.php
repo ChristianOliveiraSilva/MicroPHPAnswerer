@@ -1,5 +1,5 @@
 <?php
-namespace MicroPHPAnswerer\SessionManager;
+namespace MicroPHPAnswerer\Tools;
 
 /**
  * Classe responsavel por manipular a sessao

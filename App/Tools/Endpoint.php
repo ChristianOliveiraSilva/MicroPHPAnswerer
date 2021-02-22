@@ -1,17 +1,11 @@
 <?php
-namespace MicroPHPAnswerer\Endpoint;
+namespace MicroPHPAnswerer\Tools;
 
-require_once 'class.paramCleaner.php';
-require_once 'class.response.php';
-require_once 'class.connection.php';
-require_once 'class.JWT.php';
-require_once 'class.sessionManager.php';
-
-use MicroPHPAnswerer\ParamCleaner\ParamCleaner;
-use MicroPHPAnswerer\Response\Response;
-use MicroPHPAnswerer\Connection\Connection;
-use MicroPHPAnswerer\JWTParser\JWTParser;
-use MicroPHPAnswerer\SessionManager\SessionManager;
+use MicroPHPAnswerer\Tools\ParamCleaner;
+use MicroPHPAnswerer\Tools\Response;
+use MicroPHPAnswerer\Tools\Connection;
+use MicroPHPAnswerer\Tools\JWTParser;
+use MicroPHPAnswerer\Tools\SessionManager;
 
 /**
  * Classe responsavel por criar os endpoints

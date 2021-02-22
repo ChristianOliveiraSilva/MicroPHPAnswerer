@@ -1,5 +1,5 @@
 <?php
-namespace MicroPHPAnswerer\Connection;
+namespace MicroPHPAnswerer\Tools;
 
 /**
  * Classe responsavel por criar conexao com  banco de dados

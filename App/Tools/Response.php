@@ -1,5 +1,5 @@
 <?php
-namespace MicroPHPAnswerer\Response;
+namespace MicroPHPAnswerer\Tools;
 
 /**
  * Classe responsavel por definir uma resposta a requisição
