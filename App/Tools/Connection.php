@@ -1,6 +1,8 @@
 <?php
 namespace MicroPHPAnswerer\Tools;
 
+use MicroPHPAnswerer\Tools\EnvironmentHelper;
+
 /**
  * Classe responsavel por criar conexao com  banco de dados
  */
@@ -11,9 +13,21 @@ class Connection
     /*
      * Construtor
      */
-    function __construct(string $host, string $database, string $user, string $password)
+    function __construct()
     {
-        $this->connect($host, $database, $user, $password);
+        try {
+            $sgbd = EnvironmentHelper::getConfiguration('sgbd');
+            $host = EnvironmentHelper::getConfiguration('host');
+            $database = EnvironmentHelper::getConfiguration('database');
+            $user = EnvironmentHelper::getConfiguration('user');
+            $password = EnvironmentHelper::getConfiguration('password');
+            
+            $this->connect($sgbd, $host, $database, $user, $password);
+        } catch (\Exception $e) {
+            echo $e->getMessage();
+            http_response_code(500);
+            exit();
+        }
     }
 
     /*
@@ -21,17 +35,11 @@ class Connection
      * @param string $host host do banco de dados
      * @param string $user usuario do banco de dados
      * @param string $password senha do banco de dados
-     * @return ParamCleaner
+     * @return void
      */
-    public function connect(string $host, string $database, string $user, string $password) :void
+    public function connect(string $sgbd, string $host, string $database, string $user, string $password) :void
     {
-        try {
-            $this->conn = new \PDO("pgsql:host=$host dbname=$database user=$user password=$password");
-        } catch (\PDOException $e) {
-            echo $e->getMessage();
-            http_response_code(500);
-            exit();
-        }
+        $this->conn = new \PDO("$sgbd:host=$host dbname=$database user=$user password=$password");
     }
 
     /*

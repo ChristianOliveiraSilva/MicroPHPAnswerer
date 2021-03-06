@@ -38,24 +38,12 @@ class Endpoint
     private $connection;
 
     /*
-     * Constante para evitar login's durante testes
-     * @var Response
-     */
-    const isDev = true;
-
-    /*
      * Construtor
      * @param bool $validateJWT Validar o JWT da requisição
      */
     function __construct(
-        $validateJWT = true,
-        $hasConnection = false,
-        string $host = 'localhost',
-        string $database = 'postgres',
-        string $user = 'postgres',
-        string $password = 'postgres'
+        $validateJWT = false,
     ) {
-        header("Content-type: application/json");
 
         // Validações na requisição
         $this->ignoreRequestMethodIfNotPost();
@@ -63,13 +51,24 @@ class Endpoint
         if ($validateJWT)
             $this->validateJWTOrDie();
 
-        $this->paramCleaner = new ParamCleaner;
-        $this->response = new Response;
-        
-        if($hasConnection) 
-            $this->connection = new Connection($host, $database, $user, $password);
+        $this->setParamCleaner(new ParamCleaner);
+        $this->setResponse(new Response);
+        $this->setConnection(new Connection);
         
         register_shutdown_function(array($this, 'answerRequest'));
+    }
+
+    /*
+     * Verifica se o ambiente está rodando em modo DEV
+     * @return boolean 
+     */
+    private function isDev() :bool
+    {
+        try {
+            return EnvironmentHelper::getConfiguration('isDev') === 'true';
+        } catch (\Exception $e) {
+            return false;
+        }
     }
 
     /*
@@ -79,7 +78,7 @@ class Endpoint
      */
     private function ignoreRequestMethodIfNotPost() :void
     {
-        if ($_SERVER['REQUEST_METHOD'] !== 'POST' && !Endpoint::isDev) {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST' && !$this->isDev()) {
             echo json_encode(['alert' => 'REQUEST METHOD is not POST']);
             exit();
         }
@@ -91,7 +90,7 @@ class Endpoint
      */
     private function validateJWTOrDie() :void
     {
-        if ($this->hasInSession('JWT') && JWTParser::isValid($_SESSION['JWT']) && !Endpoint::isDev) {
+        if ($this->hasInSession('JWT') && JWTParser::isValid($_SESSION['JWT'])) {
             echo json_encode(['alert' => 'JWT was not sent']);
             exit();
         }
@@ -262,6 +261,7 @@ class Endpoint
      */
     public function answerRequest() :void
     {
+        header("Content-type: application/json");
         echo $this->getResponse()->answer();
     }
 
