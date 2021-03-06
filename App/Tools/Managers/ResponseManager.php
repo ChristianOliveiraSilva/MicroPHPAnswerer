@@ -19,7 +19,7 @@ class ResponseManager
      */
     public static function answer() :string
     {
-        return json_encode(ResponseManager::getResponse());
+        return json_encode(array_merge(['status' => http_response_code()], ResponseManager::getResponse()));
     }
 
     /*
@@ -29,7 +29,7 @@ class ResponseManager
      */
     public static function killRequest(string $msg, int $code = 500) :void
     {
-        ResponseManager::setResponse(['errorMsg' => $msg, 'status' => $code]);
+        ResponseManager::setResponse(['errorMsg' => $msg]);
         http_response_code($code);
         exit();
     }
@@ -50,10 +50,6 @@ class ResponseManager
      */
     public static function getResponse() :array
     {
-        if (empty(ResponseManager::$response)) {
-            ResponseManager::$response = ['status' => '200'];
-        }
-
         return ResponseManager::$response;
     }
 

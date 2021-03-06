@@ -25,7 +25,7 @@ class Connection
             
             $this->connect($sgbd, $host, $database, $user, $password);
         } catch (\Exception $e) {
-            ResponseManager::killRequest($e->getMessage());
+            ResponseManager::killRequest('DBError: '.$e->getMessage());
         }
     }
 
@@ -59,7 +59,7 @@ class Connection
             $stmt->execute();
             return $stmt;
         } catch(\PDOException $e) {
-            ResponseManager::killRequest($e->getMessage());
+            ResponseManager::killRequest('DBError: '.$e->getMessage());
         }
     }
 

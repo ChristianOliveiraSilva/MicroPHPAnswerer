@@ -44,6 +44,5 @@ class Endpoint
             $this->validateJWTOrDie();
 
         // $this->setConnection(new Connection);
-        
     }
 }
