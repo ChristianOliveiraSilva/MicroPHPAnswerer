@@ -1,10 +1,10 @@
 <?php
-namespace MicroPHPAnswerer\Tools;
+namespace MicroPHPAnswerer\Tools\Managers;
 
 /**
  * Classe responsavel por parsear JWT
  */
-class JWTParser
+class JWTManager
 {
     const SECRET = 'CAPIVARA';
 
@@ -50,7 +50,7 @@ class JWTParser
      */
     private static function createSignatureToken(string $base64UrlHeader, string $base64UrlPayload) :string
     {
-        $signature = hash_hmac('sha256', "$base64UrlHeader.$base64UrlPayload", JWTParser::SECRET, true);
+        $signature = hash_hmac('sha256', "$base64UrlHeader.$base64UrlPayload", JWTManager::SECRET, true);
 
         return str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($signature));
     }
@@ -63,9 +63,9 @@ class JWTParser
      */
     public static function createJWT(array $payloadInfo, int $expiration = 3600) :string
     {
-        $base64UrlHeader = JWTParser::createHeaderToken();
-        $base64UrlPayload = JWTParser::createPayloadToken($payloadInfo, $expiration);
-        $base64UrlSignature = JWTParser::createSignatureToken($base64UrlHeader, $base64UrlPayload);
+        $base64UrlHeader = JWTManager::createHeaderToken();
+        $base64UrlPayload = JWTManager::createPayloadToken($payloadInfo, $expiration);
+        $base64UrlSignature = JWTManager::createSignatureToken($base64UrlHeader, $base64UrlPayload);
 
         return "$base64UrlHeader.$base64UrlPayload.$base64UrlSignature";
     }
@@ -82,7 +82,7 @@ class JWTParser
         $payload = $part[1];
         $signature = $part[2];
 
-        $valid = hash_hmac('sha256',"$header.$payload", JWTParser::SECRET, true);
+        $valid = hash_hmac('sha256',"$header.$payload", JWTManager::SECRET, true);
         $valid = str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($valid));
 
         return $signature == $valid;
@@ -96,7 +96,7 @@ class JWTParser
     public static function unmountJWT(string $jwt) :array
     {
         $payload = explode(".", $jwt)[1] ?? [];
-        if (!JWTParser::isValid($jwt) || empty($payload))
+        if (!JWTManager::isValid($jwt) || empty($payload))
             return [];
 
         $payload =  str_replace(['-', '_'], ['+', '/'], $payload);

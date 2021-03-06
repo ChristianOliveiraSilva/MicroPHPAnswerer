@@ -1,7 +1,7 @@
 <?php
 namespace MicroPHPAnswerer\Tools;
 
-use MicroPHPAnswerer\Tools\EnvironmentHelper;
+use MicroPHPAnswerer\Tools\Managers\EnvironmentManager;
 
 /**
  * Classe responsavel por criar conexao com  banco de dados
@@ -16,11 +16,11 @@ class Connection
     function __construct()
     {
         try {
-            $sgbd = EnvironmentHelper::getConfiguration('sgbd');
-            $host = EnvironmentHelper::getConfiguration('host');
-            $database = EnvironmentHelper::getConfiguration('database');
-            $user = EnvironmentHelper::getConfiguration('user');
-            $password = EnvironmentHelper::getConfiguration('password');
+            $sgbd = EnvironmentManager::getConfiguration('sgbd');
+            $host = EnvironmentManager::getConfiguration('host');
+            $database = EnvironmentManager::getConfiguration('database');
+            $user = EnvironmentManager::getConfiguration('user');
+            $password = EnvironmentManager::getConfiguration('password');
             
             $this->connect($sgbd, $host, $database, $user, $password);
         } catch (\Exception $e) {

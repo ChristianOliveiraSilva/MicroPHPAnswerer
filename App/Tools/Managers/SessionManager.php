@@ -1,5 +1,5 @@
 <?php
-namespace MicroPHPAnswerer\Tools;
+namespace MicroPHPAnswerer\Tools\Managers;
 
 /**
  * Classe responsavel por manipular a sessao
@@ -7,7 +7,12 @@ namespace MicroPHPAnswerer\Tools;
 class SessionManager
 {
 
-    function __construct()
+    /*
+     * Inicia a sessão
+     * @param string $key Chave da Sessão
+     * @return bool
+     */
+    public static function initSession() :void
     {
         if (empty(session_id()))
             session_start();
@@ -18,7 +23,7 @@ class SessionManager
      * @param string $key Chave da Sessão
      * @return bool
      */
-    public function has(string $key) :bool
+    public static function has(string $key) :bool
     {
         return isset($_SESSION[$key]);
     }
@@ -28,7 +33,7 @@ class SessionManager
      * @param string $key Chave da Sessão
      * @return string
      */
-    public function get(string $key) :string
+    public static function get(string $key) :string
     {
         return $_SESSION[$key] ?? '';
     }
@@ -39,7 +44,7 @@ class SessionManager
      * @param string $value Valor da Sessão
      * @return void
      */
-    public function set(string $key, string $value) :void
+    public static function set(string $key, string $value) :void
     {
         $_SESSION[$key] = $value;
     }
@@ -49,7 +54,7 @@ class SessionManager
      * @param string $key Chave da Sessão
      * @return void
      */
-    public function destroy(string $key) :void
+    public static function destroy(string $key) :void
     {
         unset($_SESSION[$key]);
     }
@@ -58,7 +63,7 @@ class SessionManager
      * Destroi todos os valores na sessão
      * @return void
      */
-    public function destroyAll() :void
+    public static function destroyAll() :void
     {
         session_unset();
         session_destroy();

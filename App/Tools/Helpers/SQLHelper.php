@@ -1,10 +1,10 @@
 <?php
-namespace MicroPHPAnswerer\Tools;
+namespace MicroPHPAnswerer\Tools\Helpers;
 
 /**
  * Classe responsavel por ajudar a criar o SQL
  */
-class SqlHelper
+class SQLHelper
 {
 
     private static function getSanitalizedResquest(string $request) :string

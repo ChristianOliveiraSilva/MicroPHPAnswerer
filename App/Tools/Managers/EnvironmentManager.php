@@ -1,5 +1,5 @@
 <?php
-namespace MicroPHPAnswerer\Tools;
+namespace MicroPHPAnswerer\Tools\Managers;
 
 use MicroPHPAnswerer\Tools\Exceptions\ConfigNotFoundException;
 use MicroPHPAnswerer\Tools\Exceptions\EnvironmentFileNotFoundException;
@@ -7,7 +7,7 @@ use MicroPHPAnswerer\Tools\Exceptions\EnvironmentFileNotFoundException;
 /**
  * Classe responsavel por Criar e Manipular as variaveis de ambiente
  */
-class EnvironmentHelper
+class EnvironmentManager
 {
     const PATHNAME = 'MPA/EnvironmentConfiguration.xml';
     private static $configurations = [];
@@ -17,7 +17,7 @@ class EnvironmentHelper
      * @return void
      */
     private static function findConfigurationFile() :string {
-        $pathName = EnvironmentHelper::PATHNAME;
+        $pathName = EnvironmentManager::PATHNAME;
 
         $path = $_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR.$pathName;
         if (file_exists($path)) {
@@ -44,9 +44,9 @@ class EnvironmentHelper
      * @return void
      */
     private static function initConfigurationVariables() :void {
-        if ($xml = simplexml_load_file(EnvironmentHelper::findConfigurationFile())) {
+        if ($xml = simplexml_load_file(EnvironmentManager::findConfigurationFile())) {
             $json = json_encode($xml);
-            EnvironmentHelper::$configurations = json_decode($json, true);
+            EnvironmentManager::$configurations = json_decode($json, true);
         }
     }
 
@@ -56,10 +56,10 @@ class EnvironmentHelper
      * @return string configuration
      */
     public static function getConfiguration(string $configuration) :string {
-        if (empty(EnvironmentHelper::$configurations)) {
-            EnvironmentHelper::initConfigurationVariables();
+        if (empty(EnvironmentManager::$configurations)) {
+            EnvironmentManager::initConfigurationVariables();
         }
 
-        return EnvironmentHelper::$configurations[$configuration] ?? '';
+        return EnvironmentManager::$configurations[$configuration] ?? '';
     }
 }

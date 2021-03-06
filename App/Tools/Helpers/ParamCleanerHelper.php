@@ -1,10 +1,10 @@
 <?php
-namespace MicroPHPAnswerer\Tools;
+namespace MicroPHPAnswerer\Tools\Helpers;
 
 /**
  * Classe responsavel por tratar os parametros da requisição
  */
-class ParamCleaner
+class ParamCleanerHelper
 {
     /*
      * Função que valida os dados
@@ -12,7 +12,7 @@ class ParamCleaner
      * @param string $flag
      * @return bool
      */
-    public function validate(string $request, string $flag) :bool
+    public static function validate(string $request, string $flag) :bool
     {
         return empty(trim($request));
     }
@@ -23,7 +23,7 @@ class ParamCleaner
      * @param $flag
      * @return string
      */
-    public function sanitalize(string $request, string $flag = 'FILTER_SANITIZE_STRING') :string
+    public static function sanitalize(string $request, string $flag = 'FILTER_SANITIZE_STRING') :string
     {
         return $request;
     }
