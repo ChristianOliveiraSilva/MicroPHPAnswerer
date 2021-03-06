@@ -2,6 +2,7 @@
 namespace MicroPHPAnswerer\Tools;
 
 use MicroPHPAnswerer\Tools\Managers\EnvironmentManager;
+use MicroPHPAnswerer\Tools\Managers\ResponseManager;
 
 /**
  * Classe responsavel por criar conexao com  banco de dados
@@ -24,9 +25,7 @@ class Connection
             
             $this->connect($sgbd, $host, $database, $user, $password);
         } catch (\Exception $e) {
-            echo $e->getMessage();
-            http_response_code(500);
-            exit();
+            ResponseManager::killRequest($e->getMessage());
         }
     }
 
@@ -60,9 +59,7 @@ class Connection
             $stmt->execute();
             return $stmt;
         } catch(\PDOException $e) {
-            echo $e->getMessage();
-            http_response_code(500);
-            exit();
+            ResponseManager::killRequest($e->getMessage());
         }
     }
 

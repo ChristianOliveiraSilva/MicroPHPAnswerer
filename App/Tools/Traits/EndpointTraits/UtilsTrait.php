@@ -2,6 +2,7 @@
 namespace MicroPHPAnswerer\Tools\Traits\EndpointTraits;
 
 use MicroPHPAnswerer\Tools\Managers\EnvironmentManager;
+use MicroPHPAnswerer\Tools\Managers\ResponseManager;
 
 trait UtilsTrait {
 
@@ -26,8 +27,7 @@ trait UtilsTrait {
     private function ignoreRequestMethodIfNotPost() :void
     {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST' && !$this->isDev()) {
-            echo json_encode(['alert' => 'REQUEST METHOD is not POST']);
-            exit();
+            ResponseManager::killRequest('REQUEST METHOD is not POST', 405);
         }
     }
 }

@@ -2,6 +2,7 @@
 namespace MicroPHPAnswerer\Tools\Traits\EndpointTraits;
 
 use MicroPHPAnswerer\Tools\Helpers\ParamCleanerHelper;
+use MicroPHPAnswerer\Tools\Managers\ResponseManager;
 
 trait ParamCleanerTrait {
    
@@ -28,9 +29,7 @@ trait ParamCleanerTrait {
     {
         if (!isset($_REQUEST[$request])) {
             if ($isExit) {
-                $this->addResponse('status', 400);
-                http_response_code(400);
-                exit();
+                ResponseManager::killRequest("Param '$request' was not submitted", 400);
             } else {
                 return "";
             }

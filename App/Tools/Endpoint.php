@@ -37,12 +37,13 @@ class Endpoint
      */
     function __construct( $validateJWT = false) {
         SessionManager::initSession();
+        register_shutdown_function(array($this, 'answerRequest'));
+
         $this->ignoreRequestMethodIfNotPost();
         if ($validateJWT)
             $this->validateJWTOrDie();
 
         // $this->setConnection(new Connection);
         
-        register_shutdown_function(array($this, 'answerRequest'));
     }
 }

@@ -2,6 +2,7 @@
 namespace MicroPHPAnswerer\Tools\Traits\EndpointTraits;
 
 use MicroPHPAnswerer\Tools\Managers\JWTManager;
+use MicroPHPAnswerer\Tools\Managers\ResponseManager;
 
 trait JWTTrait {
    
@@ -12,8 +13,7 @@ trait JWTTrait {
     private function validateJWTOrDie() :void
     {
         if ($this->hasInSession('JWT') && JWTManager::isValid($_SESSION['JWT'])) {
-            echo json_encode(['alert' => 'JWT was not sent']);
-            exit();
+            ResponseManager::killRequest('JWT was not sent', 400);
         }
     }
 
@@ -39,10 +39,7 @@ trait JWTTrait {
             return $values['id'];
         }
 
-        $this->addResponse('Error', 'User is not logged');
-        $this->addResponse('status', 403);
-        http_response_code(403);
-        exit();
+        ResponseManager::killRequest('User is not logged', 401);
     }
 
     /*

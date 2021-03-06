@@ -23,6 +23,18 @@ class ResponseManager
     }
 
     /*
+     * Metodo resposanvel por matar a requisição com message de erro
+     * No caso, a regra de negocio é json
+     * @return string
+     */
+    public static function killRequest(string $msg, int $code = 500) :void
+    {
+        ResponseManager::setResponse(['errorMsg' => $msg, 'status' => $code]);
+        http_response_code($code);
+        exit();
+    }
+
+    /*
      * Setter de $response
      * @param $response
      * @return void
@@ -38,7 +50,7 @@ class ResponseManager
      */
     public static function getResponse() :array
     {
-        if(empty(ResponseManager::$response)) {
+        if (empty(ResponseManager::$response)) {
             ResponseManager::$response = ['status' => '200'];
         }
 
