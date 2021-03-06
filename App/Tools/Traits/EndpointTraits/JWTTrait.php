@@ -12,7 +12,7 @@ trait JWTTrait {
      */
     private function validateJWTOrDie() :void
     {
-        if ($this->hasInSession('JWT') && JWTManager::isValid($_SESSION['JWT'])) {
+        if (!$this->hasInSession('JWT') || !JWTManager::isValid($_SESSION['JWT'])) {
             ResponseManager::killRequest('JWT was not sent', 400);
         }
     }

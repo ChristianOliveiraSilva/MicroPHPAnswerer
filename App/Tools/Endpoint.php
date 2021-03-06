@@ -40,9 +40,7 @@ class Endpoint
         register_shutdown_function(array($this, 'answerRequest'));
 
         $this->ignoreRequestMethodIfNotPost();
-        if ($validateJWT)
-            $this->validateJWTOrDie();
-
-        // $this->setConnection(new Connection);
+        $validateJWT && $this->validateJWTOrDie();
     }
+    // $this->setConnection(new Connection);
 }
