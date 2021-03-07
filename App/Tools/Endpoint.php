@@ -35,7 +35,7 @@ class Endpoint
      * Construtor
      * @param bool $validateJWT Validar o JWT da requisição
      */
-    function __construct( $validateJWT = false) {
+    function __construct( $validateJWT = false ) {
         SessionManager::initSession();
         register_shutdown_function(array($this, 'answerRequest'));
 
