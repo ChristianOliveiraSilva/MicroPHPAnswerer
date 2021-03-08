@@ -35,12 +35,12 @@ class Endpoint
      * Construtor
      * @param bool $validateJWT Validar o JWT da requisição
      */
-    function __construct( $validateJWT = false ) {
+    function __construct( $validateJWT = false, $hasConnection = true ) {
         SessionManager::initSession();
         register_shutdown_function(array($this, 'answerRequest'));
 
         $this->ignoreRequestMethodIfNotPost();
         $validateJWT && $this->validateJWTOrDie();
+        $hasConnection && $this->setConnection(new Connection);
     }
-    // $this->setConnection(new Connection);
 }
