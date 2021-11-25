@@ -5,7 +5,7 @@ use MicroPHPAnswerer\Tools\Managers\EnvironmentManager;
 use MicroPHPAnswerer\Tools\Managers\ResponseManager;
 
 /**
- * Classe responsavel por criar conexao com  banco de dados
+ * Classe responsavel por criar conexao com banco de dados
  */
 class Connection
 {

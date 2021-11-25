@@ -6,5 +6,4 @@ composer.lock
 .php_cs.cache
 .hg
 .phpunit.result.cache
-index.php
 MPA/
