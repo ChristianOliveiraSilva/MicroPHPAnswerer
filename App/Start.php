@@ -10,7 +10,7 @@ class Start
 {
     private string $routeFile;
 
-    function __construct(string $routeFile) {
+    function __construct(?string $routeFile) {
         $this->routeFile = $routeFile;
         $this->mountRoutes();
     }
