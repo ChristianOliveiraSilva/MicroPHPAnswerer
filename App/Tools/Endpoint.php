@@ -39,7 +39,6 @@ class Endpoint
         SessionManager::initSession();
         register_shutdown_function(array($this, 'answerRequest'));
 
-        $this->ignoreRequestMethodIfNotPost();
         $validateJWT && $this->validateJWTOrDie();
         $hasConnection && $this->setConnection(new Connection);
     }

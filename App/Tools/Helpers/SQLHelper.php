@@ -47,6 +47,7 @@ class SQLHelper
     public static function createArrayFromSQLReturn(\PDOStatement $stmt) :array
     {
         $values = [];
+
         while ($result = $stmt->fetch(\PDO::FETCH_ASSOC)) {
             $value = [];
             foreach ($result as $resultKey => $resultValue)
@@ -54,6 +55,7 @@ class SQLHelper
 
             $values[] = $value;
         }
+
         return $values;
     }
 }

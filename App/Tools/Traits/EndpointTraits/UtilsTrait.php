@@ -18,16 +18,4 @@ trait UtilsTrait {
             return false;
         }
     }
-
-    /*
-     * Mata a execução se não for POST
-     * @param $paramCleaner
-     * @return void
-     */
-    private function ignoreRequestMethodIfNotPost() :void
-    {
-        if ($_SERVER['REQUEST_METHOD'] !== 'POST' && !$this->isDev()) {
-            ResponseManager::killRequest('REQUEST METHOD is not POST', 405);
-        }
-    }
 }
