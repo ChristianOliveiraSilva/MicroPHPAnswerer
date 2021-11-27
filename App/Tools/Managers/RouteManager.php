@@ -72,12 +72,18 @@ class RouteManager
         $routes = self::$routes;
         $path = $_SERVER['PATH_INFO'] ?? '/';
         $method = strtolower($_SERVER['REQUEST_METHOD']) ?? 'get';
+        $findRoute = false;
 
         foreach ($routes as $route) {
             if ($path == $route['path'] && $method == $route['method']) {
                 new $route['class'];
+                $findRoute = true;
                 break;
             }
+        }
+
+        if ($findRoute === false) {
+            http_response_code(404);
         }
     }
 
