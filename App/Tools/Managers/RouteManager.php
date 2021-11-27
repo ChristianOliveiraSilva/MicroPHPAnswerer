@@ -6,10 +6,10 @@ namespace MicroPHPAnswerer\Tools\Managers;
  */
 class RouteManager
 {
-    static public array $routes;
+    static private array $routes = [];
 
     static public function get(string $path, string $class) {
-        RouteManager::addRoute([
+        self::addRoute([
             'path' => $path,
             'class' => $class,
             'method' => 'get',
@@ -17,7 +17,7 @@ class RouteManager
     }
     
     static public function post(string $path, string $class) {
-        RouteManager::addRoute([
+        self::addRoute([
             'path' => $path,
             'class' => $class,
             'method' => 'post',
@@ -25,7 +25,7 @@ class RouteManager
     }
     
     static public function put(string $path, string $class) {
-        RouteManager::addRoute([
+        self::addRoute([
             'path' => $path,
             'class' => $class,
             'method' => 'put',
@@ -33,7 +33,7 @@ class RouteManager
     }
     
     static public function head(string $path, string $class) {
-        RouteManager::addRoute([
+        self::addRoute([
             'path' => $path,
             'class' => $class,
             'method' => 'head',
@@ -41,7 +41,7 @@ class RouteManager
     }
     
     static public function delete(string $path, string $class) {
-        RouteManager::addRoute([
+        self::addRoute([
             'path' => $path,
             'class' => $class,
             'method' => 'delete',
@@ -49,7 +49,7 @@ class RouteManager
     }
     
     static public function patch(string $path, string $class) {
-        RouteManager::addRoute([
+        self::addRoute([
             'path' => $path,
             'class' => $class,
             'method' => 'patch',
@@ -57,7 +57,7 @@ class RouteManager
     }
     
     static public function options(string $path, string $class) {
-        RouteManager::addRoute([
+        self::addRoute([
             'path' => $path,
             'class' => $class,
             'method' => 'options',
@@ -65,11 +65,11 @@ class RouteManager
     }
     
     static private function addRoute(array $newRoute): void {
-        RouteManager::$routes = [...RouteManager::$routes, $newRoute];
+        self::$routes = [...self::$routes, $newRoute];
     }
 
     static public function run() {
-        $routes = RouteManager::$routes;
+        $routes = self::$routes;
         $path = $_SERVER['PATH_INFO'];
         $method = $_SERVER['REQUEST_METHOD'];
 
