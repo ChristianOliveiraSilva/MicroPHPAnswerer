@@ -70,8 +70,8 @@ class RouteManager
 
     static public function run() {
         $routes = self::$routes;
-        $path = $_SERVER['PATH_INFO'];
-        $method = $_SERVER['REQUEST_METHOD'];
+        $path = $_SERVER['PATH_INFO'] ?? '/';
+        $method = strtolower($_SERVER['REQUEST_METHOD']) ?? 'get';
 
         foreach ($routes as $route) {
             if ($path == $route['path'] && $method == $route['method']) {
