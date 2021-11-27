@@ -6,7 +6,7 @@ namespace MicroPHPAnswerer\Tools\Managers;
  */
 class RouteManager
 {
-    static private array $routes;
+    static private RouteBundle $routes;
 
     static public function get(string $path, string $class) {
         RouteManager::addRoute([
@@ -65,11 +65,11 @@ class RouteManager
     }
     
     static private function addRoute(array $newRoute): void {
-        RouteManager::$routes = [...RouteManager::$routes, $newRoute];
+        RouteManager::$routes->setRoute($newRoute);
     }
 
     static public function run() {
-        $routes = RouteManager::$routes;
+        $routes = RouteManager::$routes->getRoutes();
         $path = $_SERVER['PATH_INFO'];
         $method = $_SERVER['REQUEST_METHOD'];
 
@@ -81,4 +81,18 @@ class RouteManager
         }
     }
 
+}
+
+
+class RouteBundle {
+
+    public array $routes;
+
+    public function setRoute(array $newRoute): void {
+        $this->routes = [...$this->routes, $newRoute];
+    }
+
+    public function getRoutes(): array {
+        return $this->routes;
+    }
 }
