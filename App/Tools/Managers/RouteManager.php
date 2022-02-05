@@ -90,10 +90,15 @@ class RouteManager
         $path = $_SERVER['PATH_INFO'] ?? '/';
         $method = strtolower($_SERVER['REQUEST_METHOD']) ?? 'get';
         $findRoute = false;
+        $hasError = false;
 
         foreach ($routes as $route) {
             if ($path === $route['path'] && $method === $route['method']) {
-                self::takeAction($route['response']);
+                try {
+                    self::takeAction($route['response']);
+                } catch (\Throwable $th) {
+                    $hasError = true;
+                }
 
                 $findRoute = true;
                 break;
@@ -102,6 +107,10 @@ class RouteManager
 
         if ($findRoute === false) {
             self::takeAction(self::$responseHTTPcode['404']);
+        }
+
+        if ($hasError === true) {
+            self::takeAction(self::$responseHTTPcode['500']);
         }
     }
 
