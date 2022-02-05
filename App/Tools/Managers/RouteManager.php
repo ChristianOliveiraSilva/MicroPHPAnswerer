@@ -81,14 +81,17 @@ class RouteManager
 
                 switch (gettype($route['response'])) {
                     case 'string':
-                        new $route['response'];
+                        $responseClass = new $route['response'];
+                        $responseClass();
                         break;
                     case 'array':
+                        $func = $route['response'][1];
                         $responseClass = new $route['response'][0];
-                        $responseClass->$route['response'][1]();
+                        $responseClass->$func();
                         break;
                     case 'object':
-                        $route['response'][1]();
+                        $func = $route['response'];
+                        $func();
                         break;
                     default:
                         throw new ResponseNotValidException("The response is not valid", 1);
