@@ -75,7 +75,7 @@ class RouteManager
         $findRoute = false;
 
         foreach ($routes as $route) {
-            if ($path == $route['path'] && $method == $route['method']) {
+            if ($path === $route['path'] && $method === $route['method']) {
                 new $route['class'];
                 $findRoute = true;
                 break;
