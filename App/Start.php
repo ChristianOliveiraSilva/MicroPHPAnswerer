@@ -25,32 +25,32 @@ class Start
         RouteManager::run();
     }
 
-    public function get(string $path, string $class) {
-        RouteManager::get($path, $class);
+    public function get(string $path, $response) {
+        RouteManager::get($path, $response);
     }
     
-    public function post(string $path, string $class) {
-        RouteManager::post($path, $class);
+    public function post(string $path, $response) {
+        RouteManager::post($path, $response);
     }
     
-    public function put(string $path, string $class) {
-        RouteManager::put($path, $class);
+    public function put(string $path, $response) {
+        RouteManager::put($path, $response);
     }
     
-    public function head(string $path, string $class) {
-        RouteManager::head($path, $class);
+    public function head(string $path, $response) {
+        RouteManager::head($path, $response);
     }
     
-    public function delete(string $path, string $class) {
-        RouteManager::delete($path, $class);
+    public function delete(string $path, $response) {
+        RouteManager::delete($path, $response);
     }
     
-    public function patch(string $path, string $class) {
-        RouteManager::patch($path, $class);
+    public function patch(string $path, $response) {
+        RouteManager::patch($path, $response);
     }
     
-    public function options(string $path, string $class) {
-        RouteManager::options($path, $class);
+    public function options(string $path, $response) {
+        RouteManager::options($path, $response);
     }
 
 }
