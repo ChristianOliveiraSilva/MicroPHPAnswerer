@@ -9,14 +9,7 @@ use MicroPHPAnswerer\Tools\Exceptions\ResponseNotValidException;
 class RouteManager
 {
     static private array $routes = [];
-    static private array $responseHTTPcode = [
-        '404' => function() {
-            echo '404';
-        },
-        '500' => function() {
-            echo '500';
-        }
-    ];
+    static private array $responseHTTPcode = [];
 
     static public function get(string $path, $response) {
         self::addRoute([
@@ -106,11 +99,15 @@ class RouteManager
         }
 
         if ($findRoute === false) {
-            self::takeAction(self::$responseHTTPcode['404']);
+            self::takeAction(self::$responseHTTPcode['404'] ?? function() {
+                echo '404';
+            });
         }
 
         if ($hasError === true) {
-            self::takeAction(self::$responseHTTPcode['500']);
+            self::takeAction(self::$responseHTTPcode['500'] ?? function() {
+                echo '500';
+            });
         }
     }
 
