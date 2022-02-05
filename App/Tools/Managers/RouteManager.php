@@ -9,6 +9,14 @@ use MicroPHPAnswerer\Tools\Exceptions\ResponseNotValidException;
 class RouteManager
 {
     static private array $routes = [];
+    static private array $responseHTTPcode = [
+        '404' => function() {
+            echo '404';
+        },
+        '500' => function() {
+            echo '500';
+        }
+    ];
 
     static public function get(string $path, $response) {
         self::addRoute([
@@ -66,6 +74,13 @@ class RouteManager
         ]);
     }
     
+    static public function registerResponseHTTPcode(string $code, $response) {
+        self::$responseHTTPcode = [
+            ...self::$responseHTTPcode, 
+            $code => $response
+        ];
+    }
+    
     static private function addRoute(array $newRoute): void {
         self::$routes = [...self::$routes, $newRoute];
     }
@@ -78,25 +93,7 @@ class RouteManager
 
         foreach ($routes as $route) {
             if ($path === $route['path'] && $method === $route['method']) {
-
-                switch (gettype($route['response'])) {
-                    case 'string':
-                        $responseClass = new $route['response'];
-                        $responseClass();
-                        break;
-                    case 'array':
-                        $func = $route['response'][1];
-                        $responseClass = new $route['response'][0];
-                        $responseClass->$func();
-                        break;
-                    case 'object':
-                        $func = $route['response'];
-                        $func();
-                        break;
-                    default:
-                        throw new ResponseNotValidException("The response is not valid", 1);
-                        break;
-                }
+                self::takeAction($route['response']);
 
                 $findRoute = true;
                 break;
@@ -104,7 +101,28 @@ class RouteManager
         }
 
         if ($findRoute === false) {
-            http_response_code(404);
+            self::takeAction(self::$responseHTTPcode['404']);
+        }
+    }
+
+    static private function takeAction($action) {
+        switch (gettype($action)) {
+            case 'string':
+                $responseClass = new $action;
+                $responseClass();
+                break;
+            case 'array':
+                $func = $action[1];
+                $responseClass = new $action[0];
+                $responseClass->$func();
+                break;
+            case 'object':
+                $func = $action;
+                $func();
+                break;
+            default:
+                throw new ResponseNotValidException("The response is not valid", 1);
+                break;
         }
     }
 
